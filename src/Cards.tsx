@@ -1,9 +1,38 @@
 import Card from './Card';
 import dummyImage from './images/dummy.jpg';
+import styled from 'styled-components';
+import { respondTo } from './_respondTo';
+
+const GridSection = styled.section`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+
+  .card {
+      grid-column: span 12;
+    }
+
+  ${respondTo.medium`
+    gap: 32px;
+
+    .card {
+      grid-column: span 6;
+    }
+  `}
+
+  ${respondTo.large`
+    .card {
+      grid-column: span 4;
+    }
+
+    .card:nth-of-type(1) {
+      grid-column: 5 / span 4;
+    }
+  `}
+`
 
 export default function Cards() {
   return (
-    <section>
+    <GridSection>
       <Card
         heading={`The home office`}
         body={`Etiam at ornare magna. Quisque ullamcorper ante neque, et pharetra nisl sollicitudin.`}
@@ -28,6 +57,6 @@ export default function Cards() {
         image={dummyImage}
         imageAlt={`Etiam at ornare magna.`}
       />
-    </section>
+    </GridSection>
   );
 }
